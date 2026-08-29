@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Pedro Advocacia — Assessoria Jurídica para Imigrantes</title>
+<meta name="description" content="Assessoria jurídica especializada para imigrantes. Processos de visto, residência e regularização conduzidos com clareza, do início ao fim.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0D12;
+    --bg-2: #0F1219;
+    --surface: #151923;
+    --surface-2: #1B202C;
+    --line: rgba(233,227,213,0.10);
+    --line-strong: rgba(233,227,213,0.18);
+    --ink: #ECE7DB;
+    --ink-dim: #A9A79C;
+    --ink-faint: #6F7280;
+    --brass: #C9A464;
+    --brass-soft: #E4C98C;
+    --teal: #4C7A70;
+    --teal-soft: #6E9C91;
+    --danger: #B5654B;
+    --radius-s: 6px;
+    --radius-m: 14px;
+    --radius-l: 26px;
+    --shadow-1: 0 20px 60px -20px rgba(0,0,0,0.6);
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1100px 600px at 85% -10%, rgba(201,164,100,0.10), transparent 60%),
+      radial-gradient(900px 500px at 5% 15%, rgba(76,122,112,0.10), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+
+  .serif{font-family:'Fraunces', serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  section{position:relative;}
+
+  ::selection{background:var(--brass);color:#14110A;}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal.is-in{opacity:1;transform:translateY(0);}
+  .reveal-d1{transition-delay:.08s;}
+  .reveal-d2{transition-delay:.16s;}
+  .reveal-d3{transition-delay:.24s;}
+  .reveal-d4{transition-delay:.32s;}
+  .reveal-d5{transition-delay:.4s;}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    *{scroll-behavior:auto !important; animation-duration:0.01ms !important;}
+  }
+
+  /* ---------- eyebrow ---------- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass-soft);
+    margin-bottom:20px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--brass-soft);opacity:.7;}
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    padding:18px 0;
+    background:linear-gradient(to bottom, rgba(11,13,18,0.92), rgba(11,13,18,0));
+    backdrop-filter:blur(6px);
+    transition:background .3s var(--ease), padding .3s var(--ease), border-color .3s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    padding:12px 0;
+    background:rgba(11,13,18,0.86);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;font-weight:600;letter-spacing:.01em;}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--brass);box-shadow:0 0 12px 2px rgba(201,164,100,.6);}
+  .header-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 18px;border-radius:999px;
+    border:1px solid var(--line-strong);
+    font-size:13px;font-weight:600;
+    transition:border-color .25s, background .25s, transform .25s;
+  }
+  .header-cta:hover{border-color:var(--brass);background:rgba(201,164,100,0.08);transform:translateY(-1px);}
+
+  /* ================= HERO ================= */
+  .hero{
+    padding:168px 0 120px;
+    position:relative;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(700px 420px at 50% 20%, black, transparent 75%);
+    opacity:.5;
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(36px, 4.6vw, 60px);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:#F5F1E6;
+  }
+  .hero h1 em{
+    font-style:italic;font-weight:500;color:var(--brass-soft);
+  }
+  .hero-sub{
+    margin-top:24px;
+    font-size:17px;
+    color:var(--ink-dim);
+    max-width:52ch;
+    line-height:1.7;
+  }
+  .hero-actions{margin-top:38px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+
+  .btn-primary{
+    position:relative;
+    display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(180deg, var(--brass-soft), var(--brass));
+    color:#1A1508;
+    font-weight:700;font-size:15px;
+    padding:16px 26px;border-radius:10px;
+    box-shadow:0 12px 30px -10px rgba(201,164,100,.55);
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+    border:none;cursor:pointer;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(201,164,100,.65);}
+  .btn-primary svg{width:18px;height:18px;}
+
+  .hero-note{
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;color:var(--ink-faint);
+  }
+  .hero-note .pulse{
+    width:8px;height:8px;border-radius:50%;background:var(--teal-soft);
+    box-shadow:0 0 0 0 rgba(110,156,145,.6);
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(110,156,145,.5);}
+    70%{box-shadow:0 0 0 8px rgba(110,156,145,0);}
+    100%{box-shadow:0 0 0 0 rgba(110,156,145,0);}
+  }
+
+  /* seal / stamp — signature element */
+  .seal-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+  .seal{
+    width:280px;height:280px;
+    border-radius:50%;
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+    animation:float 7s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(-6deg);}
+    50%{transform:translateY(-14px) rotate(-3deg);}
+  }
+  .seal-ring{
+    position:absolute;inset:0;border-radius:50%;
+    border:1.5px dashed rgba(201,164,100,.55);
+  }
+  .seal-ring.inner{inset:18px;border:1px solid rgba(233,227,213,.18);}
+  .seal-core{
+    width:190px;height:190px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(201,164,100,.16), rgba(201,164,100,.02) 60%), var(--surface);
+    border:1px solid var(--line-strong);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    box-shadow:inset 0 0 40px rgba(0,0,0,.4);
+  }
+  .seal-core .label-top{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.18em;color:var(--brass-soft);text-transform:uppercase;}
+  .seal-core .label-main{font-family:'Fraunces';font-size:26px;font-weight:600;margin:8px 0 4px;color:#F5F1E6;}
+  .seal-core .label-sub{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase;}
+  .seal-orbit-text{
+    position:absolute;inset:0;
+    animation:spin 24s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ================= IDENTIFICAÇÃO ================= */
+  .identify{padding:70px 0 10px;}
+  .identify-row{
+    display:flex;flex-wrap:wrap;gap:14px;
+  }
+  .chip{
+    padding:10px 16px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    font-size:13.5px;
+    color:var(--ink-dim);
+    background:rgba(255,255,255,0.02);
+  }
+
+  /* ================= PROBLEMA ================= */
+  .problem{padding:110px 0;}
+  .problem-head{max-width:640px;margin-bottom:56px;}
+  .problem-head h2{
+    font-family:'Fraunces';font-size:clamp(28px,3.4vw,42px);font-weight:600;
+    line-height:1.15;color:#F5F1E6;
+  }
+  .problem-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius-m);
+    overflow:hidden;
+  }
+  .problem-card{
+    background:var(--bg-2);
+    padding:32px 30px;
+    transition:background .3s;
+  }
+  .problem-card:hover{background:var(--surface);}
+  .problem-card .num{
+    font-family:'IBM Plex Mono';font-size:12px;color:var(--brass-soft);letter-spacing:.1em;
+    margin-bottom:14px;display:block;
+  }
+  .problem-card p{color:var(--ink-dim);font-size:15px;}
+  .problem-card strong{color:var(--ink);font-weight:600;}
+
+  /* ================= SOLUÇÃO ================= */
+  .solution{padding:110px 0;background:linear-gradient(180deg, transparent, rgba(76,122,112,0.05), transparent);}
+  .solution-inner{
+    display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:center;
+  }
+  .solution-visual{
+    position:relative;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius-l);
+    background:linear-gradient(160deg, var(--surface), var(--surface-2));
+    padding:36px;
+    min-height:320px;
+    display:flex;flex-direction:column;justify-content:center;gap:18px;
+    box-shadow:var(--shadow-1);
+  }
+  .solution-visual .path-line{
+    position:absolute;left:36px;top:56px;bottom:56px;width:1px;
+    background:linear-gradient(var(--brass), transparent);
+    opacity:.4;
+  }
+  .path-item{display:flex;align-items:center;gap:16px;position:relative;z-index:1;}
+  .path-dot{
+    width:10px;height:10px;border-radius:50%;background:var(--bg-2);
+    border:2px solid var(--brass);flex-shrink:0;
+  }
+  .path-item.done .path-dot{background:var(--brass);}
+  .path-item span{font-size:14.5px;color:var(--ink-dim);}
+  .path-item.done span{color:var(--ink);}
+
+  .solution-text h2{
+    font-family:'Fraunces';font-weight:600;font-size:clamp(28px,3.2vw,38px);
+    line-height:1.18;color:#F5F1E6;margin-bottom:20px;
+  }
+  .solution-text p{color:var(--ink-dim);font-size:16px;margin-bottom:14px;max-width:56ch;}
+  .solution-text p strong{color:var(--brass-soft);font-weight:600;}
+
+  /* ================= BENEFÍCIOS ================= */
+  .benefits{padding:110px 0;}
+  .benefits-head{text-align:center;max-width:600px;margin:0 auto 60px;}
+  .benefits-head h2{font-family:'Fraunces';font-size:clamp(28px,3.4vw,40px);font-weight:600;color:#F5F1E6;}
+  .benefits-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  }
+  .benefit-card{
+    padding:30px 26px;
+    border-radius:var(--radius-m);
+    border:1px solid var(--line);
+    background:rgba(255,255,255,0.015);
+    transition:transform .35s var(--ease), border-color .35s;
+  }
+  .benefit-card:hover{transform:translateY(-6px);border-color:var(--line-strong);}
+  .benefit-icon{
+    width:44px;height:44px;border-radius:10px;
+    background:rgba(201,164,100,0.10);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .benefit-icon svg{width:22px;height:22px;stroke:var(--brass-soft);}
+  .benefit-card h3{font-family:'Fraunces';font-size:19px;font-weight:600;margin-bottom:9px;color:var(--ink);}
+  .benefit-card p{font-size:14.5px;color:var(--ink-dim);}
+
+  /* ================= COMO FUNCIONA ================= */
+  .steps{padding:110px 0;background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .steps-head{max-width:560px;margin-bottom:64px;}
+  .steps-head h2{font-family:'Fraunces';font-size:clamp(28px,3.4vw,40px);font-weight:600;color:#F5F1E6;}
+  .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+  .steps-row::before{
+    content:"";position:absolute;top:34px;left:8%;right:8%;height:1px;
+    background:linear-gradient(90deg, transparent, var(--line-strong), transparent);
+  }
+  .step{position:relative;padding-right:24px;}
+  .step-num{
+    font-family:'Fraunces';font-size:52px;font-weight:600;
+    color:transparent;
+    -webkit-text-stroke:1.3px var(--brass-soft);
+    margin-bottom:22px;
+    display:inline-block;
+    background:var(--bg-2);
+    padding-right:14px;
+    position:relative;z-index:1;
+  }
+  .step h3{font-family:'Fraunces';font-size:20px;font-weight:600;margin-bottom:10px;color:var(--ink);}
+  .step p{font-size:14.5px;color:var(--ink-dim);max-width:34ch;}
+
+  /* ================= DEPOIMENTOS ================= */
+  .testimonials{padding:110px 0;}
+  .testimonials-head{max-width:600px;margin-bottom:16px;}
+  .testimonials-head h2{font-family:'Fraunces';font-size:clamp(28px,3.4vw,40px);font-weight:600;color:#F5F1E6;}
+  .demo-flag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:.06em;
+    color:var(--ink-faint);
+    margin-bottom:46px;
+    padding:8px 14px;border:1px dashed var(--line-strong);border-radius:8px;
+  }
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .testi-card{
+    padding:28px 26px;border-radius:var(--radius-m);
+    background:var(--surface);
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .testi-quote{font-size:15px;color:var(--ink);line-height:1.65;font-style:italic;font-family:'Fraunces';font-weight:400;}
+  .testi-who{display:flex;align-items:center;gap:12px;margin-top:auto;}
+  .testi-avatar{
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg, var(--teal), var(--surface-2));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono';font-size:12px;color:var(--ink);
+  }
+  .testi-name{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .testi-tag{font-size:12px;color:var(--ink-faint);}
+
+  /* ================= OFERTA ================= */
+  .offer{padding:110px 0;}
+  .offer-card{
+    border-radius:var(--radius-l);
+    border:1px solid var(--line-strong);
+    background:linear-gradient(165deg, var(--surface), var(--bg-2));
+    padding:56px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow-1);
+  }
+  .offer-card::after{
+    content:"";position:absolute;top:-40%;right:-10%;width:420px;height:420px;
+    background:radial-gradient(circle, rgba(201,164,100,.12), transparent 70%);
+    pointer-events:none;
+  }
+  .offer-top{display:grid;grid-template-columns:1.2fr 0.8fr;gap:48px;position:relative;z-index:1;}
+  .offer-top h2{font-family:'Fraunces';font-size:clamp(26px,3vw,34px);font-weight:600;color:#F5F1E6;margin-bottom:18px;}
+  .offer-list{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+  .offer-list li{display:flex;align-items:flex-start;gap:12px;font-size:14.5px;color:var(--ink-dim);}
+  .offer-list svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;stroke:var(--brass-soft);}
+  .offer-price-box{
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius-m);
+    padding:30px;
+    background:rgba(0,0,0,0.18);
+    display:flex;flex-direction:column;gap:16px;
+    align-self:start;
+  }
+  .offer-price-label{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);}
+  .offer-price{font-family:'Fraunces';font-size:26px;font-weight:600;color:var(--brass-soft);}
+  .offer-price small{display:block;font-family:'Manrope';font-size:12.5px;font-weight:500;color:var(--ink-faint);margin-top:6px;}
+  .trust-row{
+    margin-top:44px;padding-top:34px;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1;
+  }
+  .trust-item{display:flex;gap:12px;align-items:flex-start;}
+  .trust-item svg{width:20px;height:20px;stroke:var(--teal-soft);flex-shrink:0;margin-top:2px;}
+  .trust-item h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+  .trust-item p{font-size:13px;color:var(--ink-faint);}
+
+  /* ================= FAQ ================= */
+  .faq{padding:110px 0;}
+  .faq-head{max-width:560px;margin-bottom:50px;}
+  .faq-head h2{font-family:'Fraunces';font-size:clamp(28px,3.4vw,40px);font-weight:600;color:#F5F1E6;}
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;color:var(--ink);
+    padding:24px 0;font-size:16px;font-weight:600;font-family:'Manrope';
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+    cursor:pointer;
+  }
+  .faq-q .plus{
+    width:22px;height:22px;flex-shrink:0;position:relative;
+    border:1px solid var(--line-strong);border-radius:50%;
+    transition:transform .3s var(--ease), border-color .3s;
+  }
+  .faq-q .plus::before, .faq-q .plus::after{
+    content:"";position:absolute;background:var(--brass-soft);
+    top:50%;left:50%;transform:translate(-50%,-50%);
+  }
+  .faq-q .plus::before{width:9px;height:1px;}
+  .faq-q .plus::after{width:1px;height:9px;transition:opacity .25s;}
+  .faq-item.open .plus{transform:rotate(45deg);border-color:var(--brass);}
+  .faq-a{
+    max-height:0;overflow:hidden;
+    transition:max-height .4s var(--ease);
+  }
+  .faq-a p{padding-bottom:24px;color:var(--ink-dim);font-size:14.5px;max-width:64ch;}
+
+  /* ================= CTA FINAL ================= */
+  .final-cta{
+    padding:130px 0 150px;
+    text-align:center;position:relative;
+  }
+  .final-cta::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(600px 340px at 50% 30%, rgba(201,164,100,0.09), transparent 70%);
+    pointer-events:none;
+  }
+  .final-cta h2{
+    font-family:'Fraunces';font-weight:600;
+    font-size:clamp(30px,4.4vw,54px);line-height:1.1;
+    color:#F5F1E6;max-width:16ch;margin:0 auto 22px;
+  }
+  .final-cta h2 em{font-style:italic;color:var(--brass-soft);font-weight:500;}
+  .final-cta p{color:var(--ink-dim);font-size:16px;max-width:48ch;margin:0 auto 40px;}
+
+  /* ================= FOOTER ================= */
+  footer{
+    padding:56px 0 46px;border-top:1px solid var(--line);
+  }
+  .footer-row{
+    display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:30px;
+  }
+  .footer-brand{font-family:'Fraunces';font-size:18px;font-weight:600;color:var(--ink);margin-bottom:10px;}
+  .footer-col p, .footer-col a{font-size:13.5px;color:var(--ink-faint);line-height:1.9;}
+  .footer-col h5{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;}
+  .footer-bottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  /* ================= WHATSAPP FLOAT ================= */
+  .wa-float{
+    position:fixed;
+    right:max(20px, env(safe-area-inset-right));
+    bottom:max(20px, env(safe-area-inset-bottom));
+    z-index:70;
+    display:flex;align-items:center;gap:12px;
+  }
+  .wa-tooltip{
+    background:var(--surface);border:1px solid var(--line-strong);
+    padding:10px 14px;border-radius:10px;font-size:13px;color:var(--ink);
+    white-space:nowrap;box-shadow:var(--shadow-1);
+    opacity:0;transform:translateX(8px);
+    transition:opacity .3s var(--ease), transform .3s var(--ease);
+    pointer-events:none;
+  }
+  .wa-float:hover .wa-tooltip, .wa-float.show-tip .wa-tooltip{opacity:1;transform:translateX(0);}
+  .wa-btn{
+    width:60px;height:60px;border-radius:50%;
+    background:linear-gradient(160deg, #3F8A6B, #2E6650);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 32px -10px rgba(46,102,80,.65);
+    transition:transform .3s var(--ease);
+    flex-shrink:0;
+  }
+  .wa-btn:hover{transform:scale(1.06);}
+  .wa-btn svg{width:28px;height:28px;fill:#F5F1E6;}
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 940px){
+    .hero-grid{grid-template-columns:1fr;gap:56px;}
+    .seal-wrap{order:-1;}
+    .seal{width:220px;height:220px;}
+    .seal-core{width:150px;height:150px;}
+    .problem-grid{grid-template-columns:1fr;}
+    .solution-inner{grid-template-columns:1fr;}
+    .benefits-grid{grid-template-columns:repeat(2,1fr);}
+    .steps-row{grid-template-columns:1fr;gap:44px;}
+    .steps-row::before{display:none;}
+    .testi-grid{grid-template-columns:1fr;}
+    .offer-top{grid-template-columns:1fr;}
+    .trust-row{grid-template-columns:1fr;gap:20px;}
+    .offer-card{padding:36px 26px;}
+  }
+  @media (max-width: 600px){
+    .wrap{padding:0 18px;}
+    .hero{padding:140px 0 90px;}
+    .benefits-grid{grid-template-columns:1fr;}
+    .wa-tooltip{display:none;}
+    .footer-row{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Pedro <span style="color:var(--ink-faint);font-weight:500;">Advocacia</span></div>
+    <a href="#cta-final" class="header-cta">Falar agora</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Advocacia especializada em imigração</div>
+      <h1 class="reveal reveal-d1">Você não precisa entender <em>todas as leis de imigração.</em><br>Precisa de alguém que entenda por você.</h1>
+      <p class="hero-sub reveal reveal-d2">
+        Pedro acompanha imigrantes em processos de visto, residência e regularização — traduzindo prazos, exigências e decisões em um caminho claro, para que você não precise decidir sozinho o que está em jogo.
+      </p>
+      <div class="hero-actions reveal reveal-d3">
+        <a class="btn-primary" id="heroCta" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4a8.94 8.94 0 0 0-7.75 13.4L3 21l3.7-1.28a8.9 8.9 0 0 0 5.35 1.78h.01A8.94 8.94 0 0 0 21 12.9a8.96 8.96 0 0 0-3.4-6.58Z"/></svg>
+          Quero saber como funciona
+        </a>
+        <div class="hero-note"><span class="pulse"></span>Atendimento em português, direto com quem cuida do seu caso</div>
+      </div>
+    </div>
+
+    <div class="seal-wrap reveal reveal-d2">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring inner"></div>
+        <div class="seal-core">
+          <span class="label-top">Processo</span>
+          <span class="label-main">Conduzido</span>
+          <span class="label-sub">do início ao fim</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IDENTIFICAÇÃO ================= -->
+<section class="identify">
+  <div class="wrap reveal">
+    <div class="identify-row">
+      <span class="chip">Prazo de visto se aproximando</span>
+      <span class="chip">Documentação recusada ou incompleta</span>
+      <span class="chip">Medo de errar e comprometer o processo</span>
+      <span class="chip">Dificuldade em entender comunicações oficiais</span>
+      <span class="chip">Insegurança sobre o próximo passo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEMA ================= -->
+<section class="problem">
+  <div class="wrap">
+    <div class="problem-head reveal">
+      <div class="eyebrow">O que está em jogo</div>
+      <h2>Imigrar é recomeçar. E cada etapa jurídica mal resolvida pesa sobre esse recomeço.</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal reveal-d1">
+        <span class="num">01</span>
+        <p><strong>A burocracia não avisa quando você está errando.</strong> Um formulário preenchido de forma equivocada, um prazo perdido por poucos dias — e o processo que deveria abrir caminho vira um obstáculo.</p>
+      </div>
+      <div class="problem-card reveal reveal-d2">
+        <span class="num">02</span>
+        <p><strong>As informações estão espalhadas, contraditórias ou em outro idioma.</strong> Fóruns, grupos de WhatsApp e "quem já passou por isso" nunca substituem alguém que responde legalmente pelo seu caso.</p>
+      </div>
+      <div class="problem-card reveal reveal-d3">
+        <span class="num">03</span>
+        <p><strong>A vida real não espera o processo terminar.</strong> Trabalho, família, moradia — tudo depende, em algum grau, de uma situação migratória resolvida.</p>
+      </div>
+      <div class="problem-card reveal reveal-d4">
+        <span class="num">04</span>
+        <p><strong>Resolver sozinho custa mais do que parece.</strong> Retrabalho, taxas repetidas, tempo perdido corrigindo o que poderia ter sido feito certo da primeira vez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOLUÇÃO ================= -->
+<section class="solution">
+  <div class="wrap solution-inner">
+    <div class="solution-visual reveal">
+      <div class="path-line"></div>
+      <div class="path-item done"><span class="path-dot"></span><span>Análise da sua situação atual</span></div>
+      <div class="path-item done"><span class="path-dot"></span><span>Definição do caminho jurídico correto</span></div>
+      <div class="path-item"><span class="path-dot"></span><span>Organização e envio da documentação</span></div>
+      <div class="path-item"><span class="path-dot"></span><span>Acompanhamento até a decisão do processo</span></div>
+    </div>
+    <div class="solution-text reveal reveal-d2">
+      <div class="eyebrow">A resposta</div>
+      <h2>Alguém responsável pelo seu processo — não apenas por responder perguntas.</h2>
+      <p>O trabalho de Pedro não é te entregar informação genérica sobre leis de imigração. É <strong>assumir o seu caso</strong>: entender sua situação específica, apontar o caminho juridicamente correto e conduzir cada etapa com você.</p>
+      <p>Isso significa menos tempo tentando decifrar sistemas e prazos sozinho, e mais clareza sobre onde você está e o que vem a seguir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENEFÍCIOS ================= -->
+<section class="benefits">
+  <div class="wrap">
+    <div class="benefits-head reveal">
+      <div class="eyebrow" style="justify-content:center;">O que muda para você</div>
+      <h2>Não é sobre o serviço. É sobre o que ele resolve na sua vida.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal reveal-d1">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div>
+        <h3>Clareza sobre onde você está</h3>
+        <p>Você entende exatamente em que etapa o processo se encontra e o que falta — sem depender de interpretar documentos oficiais sozinho.</p>
+      </div>
+      <div class="benefit-card reveal reveal-d2">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div>
+        <h3>Menos risco de atraso ou recusa</h3>
+        <p>Documentação organizada e prazos acompanhados de perto, reduzindo a chance de erros que custam tempo e dinheiro.</p>
+      </div>
+      <div class="benefit-card reveal reveal-d3">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h8M8 16h5M6 4h9l3 3v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg></div>
+        <h3>Comunicação que você entende</h3>
+        <p>Cada exigência e cada carta oficial explicada em linguagem direta, sem juridiquês desnecessário.</p>
+      </div>
+      <div class="benefit-card reveal reveal-d4">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20h5v-2a4 4 0 0 0-3-3.87M9 20H4v-2a4 4 0 0 1 3-3.87m5-1.13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6-8a4 4 0 0 1 0 7.75M6 8a4 4 0 0 0 0 7.75"/></svg></div>
+        <h3>Estabilidade para planejar sua vida</h3>
+        <p>Trabalho, moradia, família — decisões que ficam mais seguras quando sua situação migratória está sendo tratada com rigor.</p>
+      </div>
+      <div class="benefit-card reveal reveal-d5">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg></div>
+        <h3>Um responsável, não vários intermediários</h3>
+        <p>Você fala diretamente com quem conduz seu caso — sem repassar sua história para atendentes diferentes a cada contato.</p>
+      </div>
+      <div class="benefit-card reveal reveal-d1">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg></div>
+        <h3>Tranquilidade para focar no que importa</h3>
+        <p>Enquanto o processo é conduzido com atenção técnica, você recupera espaço mental para trabalho, estudo e família.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMO FUNCIONA ================= -->
+<section class="steps">
+  <div class="wrap">
+    <div class="steps-head reveal">
+      <div class="eyebrow">Como funciona</div>
+      <h2>Três etapas, sem letra miúda.</h2>
+    </div>
+    <div class="steps-row">
+      <div class="step reveal reveal-d1">
+        <span class="step-num">01</span>
+        <h3>Conversa inicial</h3>
+        <p>Você explica sua situação pelo WhatsApp e entende, sem compromisso, qual é o caminho jurídico possível para o seu caso.</p>
+      </div>
+      <div class="step reveal reveal-d2">
+        <span class="step-num">02</span>
+        <h3>Plano do processo</h3>
+        <p>Definição clara dos documentos necessários, prazos envolvidos e das próximas ações — para que você saiba exatamente o que esperar.</p>
+      </div>
+      <div class="step reveal reveal-d3">
+        <span class="step-num">03</span>
+        <h3>Condução e acompanhamento</h3>
+        <p>Pedro conduz o processo junto com você até a decisão, mantendo você informado a cada etapa relevante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEPOIMENTOS ================= -->
+<section class="testimonials">
+  <div class="wrap">
+    <div class="testimonials-head reveal">
+      <div class="eyebrow">Depoimentos</div>
+      <h2>O que a clareza no processo muda no dia a dia</h2>
+    </div>
+    <div class="demo-flag reveal">⚠ Depoimentos demonstrativos — ilustram situações comuns atendidas, não relatos reais publicados por clientes.</div>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-d1">
+        <p class="testi-quote">"O que eu mais precisava era entender em que pé estava o meu processo. Isso, sozinho, já tirou um peso enorme."</p>
+        <div class="testi-who">
+          <div class="testi-avatar">M.</div>
+          <div><div class="testi-name">M., depoimento demonstrativo</div><div class="testi-tag">Processo de residência</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d2">
+        <p class="testi-quote">"Parei de tentar traduzir sozinho o que os documentos oficiais queriam dizer. Passei a ter alguém para perguntar direto."</p>
+        <div class="testi-who">
+          <div class="testi-avatar">R.</div>
+          <div><div class="testi-name">R., depoimento demonstrativo</div><div class="testi-tag">Regularização de visto</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d3">
+        <p class="testi-quote">"Não é só sobre o papel aprovado no fim. É sobre não passar o processo inteiro com medo de ter feito algo errado."</p>
+        <div class="testi-who">
+          <div class="testi-avatar">S.</div>
+          <div><div class="testi-name">S., depoimento demonstrativo</div><div class="testi-tag">Reagrupamento familiar</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OFERTA ================= -->
+<section class="offer">
+  <div class="wrap">
+    <div class="offer-card reveal">
+      <div class="offer-top">
+        <div>
+          <div class="eyebrow">O que está incluído</div>
+          <h2>Assessoria jurídica conduzida do início ao fim do seu processo</h2>
+          <ul class="offer-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Análise inicial da sua situação migratória</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Definição do caminho jurídico aplicável ao seu caso</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Organização e revisão da documentação exigida</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Acompanhamento direto de prazos e exigências</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Comunicação clara em cada etapa do processo</li>
+          </ul>
+        </div>
+        <div class="offer-price-box">
+          <span class="offer-price-label">Investimento</span>
+          <div class="offer-price">A consultar<small>Valor definido após entender seu caso — cada processo migratório tem exigências diferentes.</small></div>
+          <a class="btn-primary" style="justify-content:center;" id="offerCta" href="#" target="_blank" rel="noopener">Falar com Pedro</a>
+        </div>
+      </div>
+
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>
+          <div><h4>Você fala com quem cuida do caso</h4><p>Sem repasse entre atendentes diferentes a cada contato.</p></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          <div><h4>Transparência sobre cada etapa</h4><p>Você sabe o que já foi feito e o que ainda depende de você.</p></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="M8 12h8M8 16h5M6 4h9l3 3v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+          <div><h4>Sem promessas de resultado</h4><p>Cada processo depende das autoridades competentes — o compromisso aqui é com a condução correta.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq">
+  <div class="wrap">
+    <div class="faq-head reveal">
+      <div class="eyebrow">Perguntas frequentes</div>
+      <h2>Antes de falar com o Pedro</h2>
+    </div>
+
+    <div class="faq-item reveal reveal-d1">
+      <button class="faq-q">Meu caso é muito específico. Vale a pena entrar em contato mesmo assim?<span class="plus"></span></button>
+      <div class="faq-a"><p>Sim. A conversa inicial existe justamente para entender as particularidades da sua situação antes de qualquer definição de caminho jurídico.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-d2">
+      <button class="faq-q">Já tentei resolver sozinho e não deu certo. Isso complica o processo?<span class="plus"></span></button>
+      <div class="faq-a"><p>Tentativas anteriores fazem parte do histórico do seu caso e ajudam a entender o que já foi feito. O primeiro passo é justamente reorganizar essas informações.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-d3">
+      <button class="faq-q">Quanto tempo demora um processo de imigração?<span class="plus"></span></button>
+      <div class="faq-a"><p>O prazo depende do tipo de processo e das autoridades responsáveis por ele, não apenas do trabalho jurídico envolvido. Isso é explicado com clareza logo na análise inicial do seu caso.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-d4">
+      <button class="faq-q">O atendimento é feito em português?<span class="plus"></span></button>
+      <div class="faq-a"><p>Sim, todo o atendimento e acompanhamento é conduzido em português, para que nada se perca na comunicação sobre um assunto tão importante.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-d5">
+      <button class="faq-q">Como funciona o primeiro contato?<span class="plus"></span></button>
+      <div class="faq-a"><p>Pelo WhatsApp: você conta sua situação, e a partir daí é possível orientar sobre os próximos passos possíveis para o seu caso.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="final-cta" id="cta-final">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center;">Próximo passo</div>
+    <h2 class="reveal reveal-d1">Seu processo migratório <em>não precisa ser resolvido sozinho.</em></h2>
+    <p class="reveal reveal-d2">Fale agora com Pedro pelo WhatsApp e entenda qual é o caminho jurídico correto para a sua situação.</p>
+    <a class="btn-primary reveal reveal-d3" id="finalCta" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4a8.94 8.94 0 0 0-7.75 13.4L3 21l3.7-1.28a8.9 8.9 0 0 0 5.35 1.78h.01A8.94 8.94 0 0 0 21 12.9a8.96 8.96 0 0 0-3.4-6.58Z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="footer-col">
+        <div class="footer-brand">Pedro Advocacia</div>
+        <p>Assessoria jurídica para imigrantes.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <p><a id="footerWa" href="#" target="_blank" rel="noopener">WhatsApp: [DDD + número]</a></p>
+        <p>E-mail: [inserir e-mail]</p>
+      </div>
+      <div class="footer-col">
+        <h5>Sobre esta página</h5>
+        <p style="max-width:30ch;">Projeto conceitual desenvolvido para fins de portfólio. Marca, depoimentos e dados de contato são fictícios.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Aviso</h5>
+        <p style="max-width:34ch;">Conteúdo informativo. Não constitui garantia de resultado — cada processo depende da análise do caso e das autoridades competentes.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Pedro Advocacia. Todos os direitos reservados.</span>
+      <span>[Inserir OAB / registro profissional]</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP FLOAT ================= -->
+<div class="wa-float" id="waFloat">
+  <div class="wa-tooltip">Fale com Pedro agora</div>
+  <a class="wa-btn" id="waFloatBtn" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.12h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.2-8.25 8.2Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.46-1.37-1.71-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.24-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.13.16 1.75 2.67 4.24 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
+  </a>
+</div>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  }, {passive:true});
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.14, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if (isOpen) {
+        item.classList.remove('open');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // WhatsApp — projeto conceitual: link desativado (sem número real)
+  // Para uso real, defina WHATSAPP_NUMBER como '55' + DDD + número (só dígitos) e restaure o link abaixo.
+  const IS_CONCEPT_PROJECT = true;
+  const WHATSAPP_NUMBER = ''; // ex: '5511999999999'
+  const MESSAGE = 'Olá, Pedro! Vim pela sua página e gostaria de entender como funciona a assessoria para o meu processo de imigração.';
+  const waLink = WHATSAPP_NUMBER
+    ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(MESSAGE)}`
+    : '#';
+
+  ['heroCta','offerCta','finalCta','waFloatBtn','footerWa'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.setAttribute('href', waLink);
+    if (IS_CONCEPT_PROJECT) {
+      el.addEventListener('click', (e) => e.preventDefault());
+    }
+  });
+
+  // Tooltip float show after delay
+  setTimeout(() => {
+    document.getElementById('waFloat').classList.add('show-tip');
+    setTimeout(() => document.getElementById('waFloat').classList.remove('show-tip'), 3200);
+  }, 2400);
+</script>
+
+</body>
+</html>
