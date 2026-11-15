@@ -1,20 +1,22 @@
 # Pedro Advocacia · Landing page
 
-Landing page de alta conversão para um escritório de advocacia especializado em imigração (vistos, residência, regularização). **Projeto conceitual.**
+High-conversion landing page for a law firm specialized in immigration (visas, residence permits, legal status). **Concept project.**
 
-🔗 **Site:** [pedroadvocacia.netlify.app](https://pedroadvocacia.netlify.app)
+🔗 **Website:** [pedroadvocacia.netlify.app](https://pedroadvocacia.netlify.app)
 
-## Abordagem
+> The page is in Portuguese, because it targets the Portuguese market.
 
-- Texto centrado nas dores e na transformação do público imigrante
-- Prova social e respostas às objeções mais comuns
-- Chamadas para ação diretas para o WhatsApp ao longo da página
-- Página única, leve e sem dependências
+## Approach
 
-## Tecnologias
+- Copy focused on the real problems and goals of immigrants
+- Social proof and answers to the most common objections
+- Direct calls to action to WhatsApp throughout the page
+- Single page, lightweight and with no dependencies
+
+## Tech stack
 
 HTML · CSS · JavaScript · Copywriting / CRO · Netlify
 
-## Autor
+## Author
 
 **Anderson Frota** · [andersonfrota.netlify.app](https://andersonfrota.netlify.app) · [LinkedIn](https://www.linkedin.com/in/andersongfrota) · [GitHub](https://github.com/AndersonFrotaGoncalves)
